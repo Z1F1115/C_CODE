@@ -284,22 +284,62 @@
 //}
 
 //作业 获得月份天数 参考别人的
+//int main() {
+//	int y = 0;
+//	int m = 0;
+//	int days[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+//
+//	while (scanf("%d %d", &y, &m) != EOF) {
+//		int day = days[m];
+//
+//		if (m == 2) {
+//			if ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0)) {
+//				day += 1;
+//			}
+//		}
+//		
+//		printf("%d\n",day);
+//	}
+//
+//	return 0;
+//}
+
+
+//作业 有序序列插入一个输 
 int main() {
-	int y = 0;
-	int m = 0;
-	int days[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
-
-	while (scanf("%d %d", &y, &m) != EOF) {
-		int day = days[m];
-
-		if (m == 2) {
-			if ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0)) {
-				day += 1;
-			}
-		}
-		
-		printf("%d\n",day);
+	int i = 0,j = 0,n =0;
+	scanf("%d",&i);
+	
+	int* a = NULL;
+	int* pa = (int*)malloc(i*sizeof(int));
+	for (j = 0; j < i; j++) {
+		scanf("%d",&pa[j]);
 	}
+
+	scanf("%d", &n);
+
+	int* ppa = (int*)realloc(pa, (i + 1) * sizeof(int));
+	if (ppa != NULL) {
+		pa = ppa;
+	}
+
+	pa[i] = n;
+
+	for (j = i; j > 0; j--) {
+		if (pa[j] < pa[j - 1]) {
+			int tmp = pa[j];
+			pa[j] = pa[j - 1];
+			pa[j - 1] = tmp;
+		}
+	}
+	
+	for (j = 0; j < i + 1; j++) {
+		printf("%d ", pa[j]);
+	}
+
+	free(pa);
+	pa = NULL;
 
 	return 0;
 }
+
